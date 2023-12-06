@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10">
+  <title>Vue CDN</title>
+
+  <!-- Vue CDN -->
+  <script src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.21"></script>
+
+  <!-- Plugins -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Components (contents & layouts) -->
+  <script src="/components/contents/gnb.js"></script>
+  <script src="/components/layouts/header.js"></script>
+  <script src="/components/layouts/footer.js"></script>
+
+  <!-- Views(Pages) -->
+  <script src="/views/main-page.js"></script>
+  <script src="/views/about-page.js"></script>
+  <script src="/views/news-page.js"></script>
+
+  <!-- css(styles) -->
+  <link rel="stylesheet" href="/styles/fonts.css">
+  <link rel="stylesheet" href="/styles/common.css">
+  <link rel="stylesheet" href="/styles/normal.css">
+  <link rel="stylesheet" href="/styles/responsive.css">
+</head>
+<body>
+  
+<div id="app">
+  <header-component></header-component>
+  <router-view></router-view>
+  <footer-component></footer-component>
+</div>
+
+<script>
+const app = Vue.createApp({});
+
+// Components
+app.component('header-component', HeaderComponent);
+app.component('footer-component', FooterComponent);
+
+// Views(Pages)
+app.component('main-page', MainPage);
+app.component('about-page', AboutPage);
+app.component('news-page', NewsPage);
+
+// Router
+const router = VueRouter.createRouter({
+  history: VueRouter.createWebHistory('/'),
+  routes: [
+    { 
+      path: '/',
+      component: MainPage,
+      meta: { 
+        showHeader: true,
+        showFooter: true,
+      },
+    },
+    { 
+      path: '/about',
+      component: AboutPage,
+      meta: { 
+        showHeader: true,
+        showFooter: true,
+      },
+    },
+    { 
+      path: '/news',
+      component: NewsPage,
+      meta: { 
+        showHeader: true,
+        showFooter: true,
+      },
+    },
+  ]
+});
+
+app.use(router);
+app.mount('#app');
+</script>
+
+</body>
+</html>
